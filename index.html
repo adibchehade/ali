@@ -75,7 +75,7 @@
   .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:8px; }
   .status { display:flex; align-items:center; gap:8px; color:var(--muted); margin:10px 2px 0; flex-wrap:wrap; }
   .dot { width:8px; height:8px; border-radius:50%; background:var(--ok-fg); flex:0 0 8px; }
-  .status .right { margin-left:auto; display:flex; gap:16px; }
+  .status .right { margin-left:auto; display:flex; gap:16px; flex-wrap:wrap; }
   .link { color:var(--accent-text); cursor:pointer; background:none; border:0; font:inherit; padding:0; }
   @media (max-width:640px) {
     .tools { width:100%; }
@@ -277,7 +277,7 @@
 
   <div class="status">
     <span class="dot"></span><span id="statustext">Ready</span>
-    <span class="right"><button class="link" type="button" id="clear">Clear ticks</button></span>
+    <span class="right"><span id="updated">Checked against email every day. Last update: Wed 11 Nov 13:39 · Spain.</span><button class="link" type="button" id="clear">Clear ticks</button></span>
   </div>
 </div>
 <script>
