@@ -154,7 +154,6 @@
 
   <section class="panel">
     <header><span class="label">Exams &amp; deadlines</span><span class="tag">All four subjects</span></header>
-    <div class="row" data-archive-after="2026-12-06"><span class="nobox"></span><span class="when">Mon 23 Nov<br>14:00</span><span class="what"><span class="title">Spring 2027 course registration opens</span><span class="sub">Student Portal · first come, first served · closes Sun 6 Dec 14:00 · Ali registered <b>EN 114 College Research and Writing</b> (section MAD-A) on Mon 23 Nov · final confirmation comes after registration closes · Madrid help desk: UEX Room (2nd floor), Tue 24 and Thu 26 Nov 11:30 – 12:30</span></span><span class="pill work" data-countdown="2026-11-23" data-after="Open">Deadline</span></div>
     <div class="row"><span class="nobox"></span><span class="when">Mon 14 Dec<br>in class</span><span class="what"><span class="title">International Business midterm project · GEB1350</span><span class="sub">Ali + Sofie Z. present <b>Alphabet</b> to Jose Velasco · upload to Blackboard the same day · executive summary (8–12 slides), strategy since COVID, valuation (comparable companies, comparable acquisitions, DCF), conclusions</span></span><span class="pill warn" data-countdown="2026-12-14">Exam</span></div>
     <div class="row"><span class="nobox"></span><span class="when">By Fri 22 Jan</span><span class="what"><span class="title">Final exams · all subjects</span><span class="sub">Dates not announced yet · the term ends Fri 22 Jan 2027 · the Spanish final has an oral part</span></span><span class="pill off">Not announced</span></div>
   </section>
@@ -397,6 +396,8 @@
     var dow = (new Date(today + 'T12:00:00Z').getUTCDay() + 6) % 7 + 1, hm = now.slice(11), inRange = today >= '2026-11-23' && today <= WEND;
     document.querySelectorAll('.row[data-dow]').forEach(function (r) { r.classList.toggle('now', inRange && +r.dataset.dow === dow && r.dataset.s <= hm && hm < r.dataset.e); });
     document.querySelectorAll('.day, .wday').forEach(function (d) { d.classList.toggle('is-today', d.dataset.day === today); });
+    // Weekly plan: days of this week that are over are hidden; the full week comes back on Monday
+    document.querySelectorAll('.wday').forEach(function (d) { d.hidden = !!d.dataset.day && d.dataset.day < today; });
     document.querySelectorAll('[data-countdown]').forEach(function (el) {
       var n = Math.round((Date.parse(el.dataset.countdown) - Date.parse(today)) / 864e5);
       if (n < 0 && !el.dataset.after) { el.className = 'pill off'; }
