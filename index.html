@@ -99,6 +99,11 @@
   details.archive[open] > summary::after { content:"Hide"; }
   details.archive .list { padding:0 14px 14px; opacity:.7; }
   details.archive .row.past { opacity:1; }
+  details.archday { margin:8px 0 0; padding:10px 12px 12px; }
+  details.archday > summary { list-style:none; cursor:pointer; display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; }
+  details.archday > summary::-webkit-details-marker { display:none; }
+  details.archday > summary::after { content:"Show hours"; margin-left:auto; color:var(--accent-text); font-size:12px; }
+  details.archday[open] > summary::after { content:"Hide"; }
   details.archive .row.now { box-shadow:none; border-color:var(--card-border); background:var(--card); }
   .status { display:flex; align-items:center; gap:8px; color:var(--muted); margin:10px 2px 0; flex-wrap:wrap; }
   .dot { width:8px; height:8px; border-radius:50%; background:var(--ok-fg); flex:0 0 8px; }
@@ -396,7 +401,7 @@
     var dow = (new Date(today + 'T12:00:00Z').getUTCDay() + 6) % 7 + 1, hm = now.slice(11), inRange = today >= '2026-11-23' && today <= WEND;
     document.querySelectorAll('.row[data-dow]').forEach(function (r) { r.classList.toggle('now', inRange && +r.dataset.dow === dow && r.dataset.s <= hm && hm < r.dataset.e); });
     document.querySelectorAll('.day, .wday').forEach(function (d) { d.classList.toggle('is-today', d.dataset.day === today); });
-    // Weekly plan: days of this week that are over are hidden; the full week comes back on Monday
+    // Weekly plan: days of this week that are over leave the plan (they are kept, hour by hour, in the Archive below)
     document.querySelectorAll('.wday').forEach(function (d) { d.hidden = !!d.dataset.day && d.dataset.day < today; });
     document.querySelectorAll('[data-countdown]').forEach(function (el) {
       var n = Math.round((Date.parse(el.dataset.countdown) - Date.parse(today)) / 864e5);
@@ -419,6 +424,26 @@
     document.querySelectorAll('.row [data-countdown]').forEach(function (el) {
       var r = el.closest('.row'); if (!r.dataset.archiveAfter && el.dataset.countdown < today) archive(r, el.dataset.countdown + ' 00:00');
     });
+    // Every finished day of the weekly plan goes to the Archive with its hourly schedule and the ticks Ali made
+    for (var d = new Date('2026-11-23T12:00:00Z'); ; d.setUTCDate(d.getUTCDate() + 1)) {
+      var ds = d.toISOString().slice(0, 10); if (ds >= today || ds > WEND) break;
+      if (list.querySelector('.archday[data-date="' + ds + '"]')) continue;
+      var wdow = (d.getUTCDay() + 6) % 7 + 1, src = document.querySelector('.wday[data-dow="' + wdow + '"]'); if (!src) continue;
+      var mk = new Date(d); mk.setUTCDate(mk.getUTCDate() - (wdow - 1)); mk = mk.toISOString().slice(0, 10);
+      var det = document.createElement('details'); det.className = 'panel archday'; det.dataset.date = ds; det.dataset.key = ds + ' 99:99';
+      var sm = document.createElement('summary'), lb = document.createElement('span'), tg = document.createElement('span');
+      lb.className = 'label'; lb.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long' }).format(d).replace(',', '');
+      tg.className = 'tag'; tg.textContent = (src.querySelector('header .tag') || {}).textContent || '';
+      var hb = 0, hd = 0;
+      sm.appendChild(lb); sm.appendChild(tg); det.appendChild(sm);
+      src.querySelectorAll('.row').forEach(function (r) {
+        var c = r.cloneNode(true); c.removeAttribute('data-dow'); c.classList.remove('now');
+        var i = c.querySelector('input'); if (i) { hb++; i.checked = !!done['w' + i.dataset.wid + '@' + mk]; if (i.checked) hd++; i.removeAttribute('data-wid'); i.disabled = true; }
+        det.appendChild(c);
+      });
+      if (hb) tg.textContent += ' · ' + hd + '/' + hb + ' ticked';
+      list.appendChild(det);
+    }
     Array.prototype.slice.call(list.children).sort(function (x, y) { return x.dataset.key < y.dataset.key ? 1 : -1; }).forEach(function (r) { list.appendChild(r); });
     document.getElementById('archive').hidden = !list.children.length;
     document.getElementById('archcount').textContent = list.children.length + (list.children.length === 1 ? ' item' : ' items');
