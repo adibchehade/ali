@@ -48,6 +48,7 @@
   .wday.is-today .today { display:inline-block; }
   .day.is-today .today { display:inline-block; }
   .row { display:grid; grid-template-columns:18px 122px 1fr auto; align-items:center; gap:12px; background:var(--card); border:1px solid var(--card-border); border-radius:10px; padding:10px 14px; margin-top:6px; }
+  .row[hidden] { display:none; }
   label.row:has(input) { cursor:pointer; }
   label.row:has(input):hover { background:var(--card-hover); }
   .row.now { border-color:var(--accent-text); box-shadow:inset 3px 0 0 var(--accent-text); background:var(--card-hover); }
@@ -193,8 +194,17 @@
     <label class="row k-gym" data-dow="2" data-s="20:30" data-e="21:45"><input type="checkbox" data-wid="2-20:30" data-group="gym" aria-label="Done: gym Tue 20:30"><span class="when">20:30 – 21:45</span><span class="what"><span class="title">Gym session</span><span class="sub">Evening workout · Finishes before the 00:00 weekday closing</span></span><span class="pill warn">Gym</span></label>
     <div class="row k-free" data-dow="2" data-s="21:45" data-e="24:00"><span class="nobox"></span><span class="when">21:45 onward</span><span class="what"><span class="title">Dinner and free evening</span></span><span class="pill off">Free / Rest</span></div>
   </section>
-  <section class="panel wday" data-dow="3">
+  <section class="panel wday" data-dow="3" data-odate="2026-11-25" data-otag="Busy until 17:00 · 5 h evening study · no gym">
     <header><span class="label"><span class="wd" data-dow="3" data-long="1">Wednesday</span></span><span class="tag">No class · 5 h study · gym 19:30</span><span class="today">Today</span></header>
+    <div class="row k-busy" data-dow="3" data-only="2026-11-25" data-s="08:30" data-e="17:00"><span class="nobox"></span><span class="when">08:30 – 17:00</span><span class="what"><span class="title">Daytime commitments</span><span class="sub">Unavailable until 17:00 · today only</span></span><span class="pill off">Busy</span></div>
+    <div class="row k-free" data-dow="3" data-only="2026-11-25" data-s="17:00" data-e="17:30"><span class="nobox"></span><span class="when">17:00 – 17:30</span><span class="what"><span class="title">Decompress &amp; snack</span><span class="sub">30 min post-day reset</span></span><span class="pill off">Free / Rest</span></div>
+    <label class="row k-study" data-dow="3" data-only="2026-11-25" data-s="17:30" data-e="19:30"><input type="checkbox" data-wid="3-2026-11-25-17:30" data-group="study" aria-label="Done: International Business Wed 25 Nov 17:30"><span class="when">17:30 – 19:30</span><span class="what"><span class="title">International Business (GEB1350) · study</span><span class="sub">2h deep-work block</span></span><span class="pill work">Study</span></label>
+    <div class="row k-free" data-dow="3" data-only="2026-11-25" data-s="19:30" data-e="20:00"><span class="nobox"></span><span class="when">19:30 – 20:00</span><span class="what"><span class="title">Short break</span><span class="sub">30 min reset after the 2h Business block</span></span><span class="pill off">Free / Rest</span></div>
+    <label class="row k-study" data-dow="3" data-only="2026-11-25" data-s="20:00" data-e="21:00"><input type="checkbox" data-wid="3-2026-11-25-20:00" data-group="study" aria-label="Done: Spanish Wed 25 Nov 20:00"><span class="when">20:00 – 21:00</span><span class="what"><span class="title">Spanish (SP101) · study</span><span class="sub">1h</span></span><span class="pill work">Study</span></label>
+    <div class="row k-free" data-dow="3" data-only="2026-11-25" data-s="21:00" data-e="21:30"><span class="nobox"></span><span class="when">21:00 – 21:30</span><span class="what"><span class="title">Dinner &amp; recharge</span><span class="sub">30 min meal break</span></span><span class="pill off">Free / Rest</span></div>
+    <label class="row k-study" data-dow="3" data-only="2026-11-25" data-s="21:30" data-e="22:30"><input type="checkbox" data-wid="3-2026-11-25-21:30" data-group="study" aria-label="Done: Programming Foundation Wed 25 Nov 21:30"><span class="when">21:30 – 22:30</span><span class="what"><span class="title">Programming Foundation (CS110) · study</span><span class="sub">1h</span></span><span class="pill work">Study</span></label>
+    <label class="row k-study" data-dow="3" data-only="2026-11-25" data-s="22:30" data-e="23:30"><input type="checkbox" data-wid="3-2026-11-25-22:30" data-group="study" aria-label="Done: English Composition Wed 25 Nov 22:30"><span class="when">22:30 – 23:30</span><span class="what"><span class="title">English Composition (EN113) · study</span><span class="sub">1h · completes all 5h of study</span></span><span class="pill work">Study</span></label>
+    <div class="row k-free" data-dow="3" data-only="2026-11-25" data-s="23:30" data-e="24:00"><span class="nobox"></span><span class="when">23:30 onward</span><span class="what"><span class="title">Wind down &amp; sleep</span><span class="sub">Gym skipped today</span></span><span class="pill off">Free / Rest</span></div>
     <label class="row k-study" data-dow="3" data-s="10:00" data-e="12:00"><input type="checkbox" data-wid="3-10:00" data-group="study" aria-label="Done: International Business Wed 10:00"><span class="when">10:00 – 12:00</span><span class="what"><span class="title">International Business (GEB1350) · study</span><span class="sub">2h block</span></span><span class="pill work">Study</span></label>
     <div class="row k-free" data-dow="3" data-s="12:00" data-e="12:30"><span class="nobox"></span><span class="when">12:00 – 12:30</span><span class="what"><span class="title">30-min break after the 2h Business block</span></span><span class="pill off">Free / Rest</span></div>
     <label class="row k-study" data-dow="3" data-s="12:30" data-e="13:30"><input type="checkbox" data-wid="3-12:30" data-group="study" aria-label="Done: Spanish Wed 12:30"><span class="when">12:30 – 13:30</span><span class="what"><span class="title">Spanish (SP101) · study</span><span class="sub">1h</span></span><span class="pill work">Study</span></label>
@@ -258,7 +268,6 @@
   <section class="panel">
     <header><span class="label">What to focus on, period by period</span></header>
     <div class="row"><span class="nobox"></span><span class="when">Wed 18 Nov –<br>Sun 13 Dec</span><span class="what"><span class="title">Normal weeks · Alphabet project in the Business blocks</span><span class="sub">By Sun 22 Nov: executive summary slides · by Sun 29 Nov: strategy since COVID · by Sun 6 Dec: valuation (comparables, acquisitions, DCF) · Wed 9 – Sat 12 Dec: conclusions and rehearsal with Sofie · Mon 14 Dec: present and upload</span></span><span class="pill work">Project</span></div>
-    <div class="row" data-archive-after="2026-11-25"><span class="nobox"></span><span class="when">Wed 25 Nov<br>today only</span><span class="what"><span class="title">Wednesday override · busy until 17:00 · 5 h evening study · no gym</span><span class="sub">08:30 – 17:00 busy · 17:00 – 17:30 rest · 17:30 – 19:30 International Business (GEB1350) · 19:30 – 20:00 break · 20:00 – 21:00 Spanish (SP101) · 21:00 – 21:30 dinner · 21:30 – 22:30 Programming Foundation (CS110) · 22:30 – 23:30 English Composition (EN113) · gym skipped today · other Wednesdays unchanged</span></span><span class="pill warn">Today only</span></div>
     <div class="row"><span class="nobox"></span><span class="when">Thu 10 Dec</span><span class="what"><span class="title">Spanish make-up class 12:00 – 15:00, room M001</span><span class="sub">It overlaps that Thursday's 12:30 Programming block · do Programming 17:30 – 18:30 instead, still before the 19:30 gym</span></span><span class="pill work">Make-up</span></div>
     <div class="row"><span class="nobox"></span><span class="when">Tue 15 Dec –<br>Sun 20 Dec</span><span class="what"><span class="title">Review week</span><span class="sub">Use every block to write a one-page summary per subject before the break</span></span><span class="pill ok">Review</span></div>
     <div class="row"><span class="nobox"></span><span class="when">Mon 21 Dec –<br>Fri 8 Jan</span><span class="what"><span class="title">Winter break · light plan</span><span class="sub">One 2-hour block a day, five days a week, rotating the four subjects · keep speaking Spanish for the oral final</span></span><span class="pill off">Break</span></div>
@@ -320,7 +329,7 @@
   </details>
 
   <div class="status">
-    <span class="right" style="margin-left:0;width:100%;justify-content:space-between"><span id="updated">Checked against email twice a day. Last update: Wed 25 Nov 11:44 · Spain.</span><button class="link" type="button" id="clear">Clear ticks</button></span>
+    <span class="right" style="margin-left:0;width:100%;justify-content:space-between"><span id="updated">Checked against email twice a day. Last update: Wed 25 Nov 18:17 · Spain.</span><button class="link" type="button" id="clear">Clear ticks</button></span>
   </div>
 </div>
 <script>
@@ -355,7 +364,7 @@
     var today = spain({ year: 'numeric', month: '2-digit', day: '2-digit' }, 'en-CA');
     if (today >= WSTART) {
       var w = { study: [0, 0], gym: [0, 0] };
-      wboxes.forEach(function (b) { w[b.dataset.group][1]++; if (b.checked) w[b.dataset.group][0]++; });
+      wboxes.forEach(function (b) { if (b.closest('.row').hidden) return; w[b.dataset.group][1]++; if (b.checked) w[b.dataset.group][0]++; });
       document.getElementById('summary').textContent = 'This week: Study ' + w.study[0] + '/' + w.study[1] + ' · Gym ' + w.gym[0] + '/' + w.gym[1];
       return;
     }
@@ -388,6 +397,16 @@
       var sec = el.closest('.wday'); if (sec) sec.dataset.day = d.toISOString().slice(0, 10);
     });
   }
+  // One-day overrides: rows with data-only="YYYY-MM-DD" replace that weekday's usual rows on that date only
+  function overrides() {
+    document.querySelectorAll('.wday').forEach(function (sec) {
+      var day = sec.dataset.day, has = !!sec.querySelector('.row[data-only="' + day + '"]');
+      sec.querySelectorAll('.row').forEach(function (r) { r.hidden = r.dataset.only ? r.dataset.only !== day : has; });
+      var tg = sec.querySelector('header .tag'); if (!tg) return;
+      if (!tg.dataset.base) tg.dataset.base = tg.textContent;
+      tg.textContent = sec.dataset.odate === day && sec.dataset.otag ? sec.dataset.otag : tg.dataset.base;
+    });
+  }
   function mark() {
     var today = spain({ year: 'numeric', month: '2-digit', day: '2-digit' }, 'en-CA');
     var now = today + ' ' + spain({ hour: '2-digit', minute: '2-digit', hour12: false });
@@ -397,7 +416,7 @@
       r.classList.toggle('past', e <= now); r.classList.toggle('now', on);
       if (on) cur = r; else if (!nxt && s > now) nxt = r;
     });
-    loadWeek(); summary(); weekDates();
+    weekDates(); overrides(); loadWeek(); summary();
     var ch = document.getElementById('cheer'); if (ch) ch.hidden = today > ch.dataset.until;
     var dow = (new Date(today + 'T12:00:00Z').getUTCDay() + 6) % 7 + 1, hm = now.slice(11), inRange = today >= '2026-11-23' && today <= WEND;
     document.querySelectorAll('.row[data-dow]').forEach(function (r) { r.classList.toggle('now', inRange && +r.dataset.dow === dow && r.dataset.s <= hm && hm < r.dataset.e); });
@@ -434,11 +453,13 @@
       var det = document.createElement('details'); det.className = 'panel archday'; det.dataset.date = ds; det.dataset.key = ds + ' 99:99';
       var sm = document.createElement('summary'), lb = document.createElement('span'), tg = document.createElement('span');
       lb.className = 'label'; lb.textContent = new Intl.DateTimeFormat('en-GB', { timeZone: 'UTC', weekday: 'long', day: 'numeric', month: 'long' }).format(d).replace(',', '');
-      tg.className = 'tag'; tg.textContent = (src.querySelector('header .tag') || {}).textContent || '';
+      tg.className = 'tag'; var hasO = !!src.querySelector('.row[data-only="' + ds + '"]'), htg = src.querySelector('header .tag');
+      tg.textContent = src.dataset.odate === ds && src.dataset.otag ? src.dataset.otag : htg ? (htg.dataset.base || htg.textContent) : '';
       var hb = 0, hd = 0;
       sm.appendChild(lb); sm.appendChild(tg); det.appendChild(sm);
       src.querySelectorAll('.row').forEach(function (r) {
-        var c = r.cloneNode(true); c.removeAttribute('data-dow'); c.classList.remove('now');
+        if (r.dataset.only ? r.dataset.only !== ds : hasO) return;
+        var c = r.cloneNode(true); c.removeAttribute('data-dow'); c.removeAttribute('data-only'); c.hidden = false; c.classList.remove('now');
         var i = c.querySelector('input'); if (i) { hb++; i.checked = !!done['w' + i.dataset.wid + '@' + mk]; if (i.checked) hd++; i.removeAttribute('data-wid'); i.disabled = true; }
         det.appendChild(c);
       });
@@ -452,7 +473,7 @@
     // ---- What is on now / next (dated rows and the weekly plan)
     var live = Array.prototype.slice.call(document.querySelectorAll('.row[data-start]')).filter(function (r) { return r.parentNode !== list && r.dataset.start.slice(11) !== '00:00'; })
       .map(function (r) { return { r: r, s: r.dataset.start, e: r.dataset.end }; });
-    if (inRange) document.querySelectorAll('.row[data-dow="' + dow + '"]').forEach(function (r) { live.push({ r: r, s: today + ' ' + r.dataset.s, e: today + ' ' + r.dataset.e }); });
+    if (inRange) document.querySelectorAll('.row[data-dow="' + dow + '"]').forEach(function (r) { if (!r.hidden) live.push({ r: r, s: today + ' ' + r.dataset.s, e: today + ' ' + r.dataset.e }); });
     live.sort(function (x, y) { return x.s < y.s ? -1 : x.s > y.s ? 1 : 0; });
     var c = live.filter(function (x) { return x.s <= now && now < x.e; })[0], n = live.filter(function (x) { return x.s > now; })[0];
     function tm(t) { var h = t.slice(11); return h === '23:59' || h === '24:00' ? 'bedtime' : h; }
